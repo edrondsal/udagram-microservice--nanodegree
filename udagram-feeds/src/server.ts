@@ -42,7 +42,7 @@ import * as c from './config/config';
   }
   
   // Get all feed items
-  app.get('/api/v0/feed/', async (req: Request, res: Response) => {
+  app.get('/api/v0/feed', async (req: Request, res: Response) => {
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
     items.rows.map((item) => {
       if (item.url) {
