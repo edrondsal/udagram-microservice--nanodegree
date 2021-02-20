@@ -1,0 +1,36 @@
+{
+  "name": "udagram-gateway",
+  "version": "1.0.0",
+  "description": "Gateway microservice for the Udagram backend",
+  "main": "build/server.js",
+  "scripts": {
+    "start": "node .",
+    "tsc": "tsc",
+    "dev": "ts-node-dev ./src/server.ts"
+  },
+  "keywords": [],
+  "author": "Eduardo Rondon",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-http-proxy": "^1.6.2",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.16.1",
+    "@types/express-http-proxy": "^1.6.1",
+    "@types/node": "^11.11.6",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "mocha": "^6.1.4",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "^3.3.4000"
+  }
+}
