@@ -24,10 +24,10 @@ import cors from 'cors';
     origin: 'http://localhost:8100',
   }));
 
-  app.use('/api/v0/feed', proxy(feedMicroservice , {
+  app.use('/api/v0/feed/*', proxy(feedMicroservice , {
     proxyReqPathResolver: req => new URL(req.baseUrl,feedMicroservice).pathname
   }));
-  app.use('/api/v0/users', proxy(usersMicroservice, {
+  app.use('/api/v0/users/*', proxy(usersMicroservice, {
     proxyReqPathResolver: req => new URL(req.baseUrl,usersMicroservice).pathname
   }));
 
