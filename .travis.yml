@@ -5,21 +5,41 @@ node_js:
 services:
   - docker
 
-# Pre-testing installs
-install:
-  - echo "nothing needs to be installed"
+stages:
+  - feeds
+  - users
 
-# Scripts to be run such as tests
-before_script:
-  - echo "no tests"
-  - cd udagram-feeds
+jobs:
+  include:
+    - stage: feeds
+      # Pre-testing installs
+      install:
+        - echo "nothing needs to be installed"
+      # Scripts to be run such as tests
+      before_script:
+        - echo "no tests"
+        - cd udagram-feeds
+      script:
+        - docker --version # print the version for logging
+        - docker build -t udagram-feeds .
+        - docker tag udagram-feeds edrondsal/udagram-feeds:latest
+      # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push edrondsal/udagram-feeds
 
-script:
-  - docker --version # print the version for logging
-  - docker build -t udagram-feeds .
-  - docker tag udagram-feeds edrondsal/udagram-feeds:latest
-
-# Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
-after_success:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push edrondsal/udagram-feeds
+    - stage: users
+      install:
+        - echo "nothing needs to be installed"
+      # Scripts to be run such as tests
+      before_script:
+        - echo "no tests"
+        - cd udagram-users
+      script:
+        - docker --version # print the version for logging
+        - docker build -t udagram-users .
+        - docker tag udagram-users edrondsal/udagram-users:latest
+      # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push edrondsal/udagram-users
