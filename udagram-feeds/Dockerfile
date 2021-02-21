@@ -20,5 +20,5 @@ ADD . /usr/src/app
 # TypeScript
 RUN npm run tsc
 # Start
-EXPOSE 8080
+EXPOSE 8881
 CMD [ "npm", "start" ]
