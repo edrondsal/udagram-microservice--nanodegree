@@ -43,3 +43,20 @@ jobs:
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker push edrondsal/udagram-users
+
+    - stage: gateway
+      # Pre-testing installs
+      install:
+        - echo "nothing needs to be installed"
+      # Scripts to be run such as tests
+      before_script:
+        - echo "no tests"
+        - cd udagram-gateway
+      script:
+        - docker --version # print the version for logging
+        - docker build -t udagram-gateway .
+        - docker tag udagram-gateway edrondsal/udagram-gateway:latest
+      # Tasks to perform after the process is successful. Formatting the Docker username and password as below enables you to programmatically log in without having the password exposed in logs.
+      after_success:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker push edrondsal/udagram-gateway
