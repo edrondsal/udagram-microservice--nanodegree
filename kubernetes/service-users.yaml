@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app-udagram-users
+  name: app-udagram-users-svc
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/app-udagram-users-svc
+spec:
+  ports:
+  - port: 8882
+    protocol: TCP
+  selector:
+    run: app-udagram-users

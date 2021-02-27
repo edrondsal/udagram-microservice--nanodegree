@@ -35,3 +35,4 @@ The strategy consist in having the backend splitted in three microservices:
 * You can visit `http://localhost:8100` in your web browser to verify that the application is running. You should see a web interface.
 
 
+aws eks update-kubeconfig --region <AWS_REGION> --name <EKS_CLUSTER_NAME>

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-udagram-gateway
+  labels:
+    app: app-udagram-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-udagram-gateway
+  template:
+    metadata:
+      labels:
+        app: app-udagram-gateway
+    spec:
+      containers:
+      - name: udagram-gateway
+        image: edrondsal/udagram-gateway
+        ports:
+        - containerPort: 8080
+      env:
+       - name: FEED
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: FEED
+       - name: USERS
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: USERS

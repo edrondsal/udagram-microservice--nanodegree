@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-udagram-feeds
+  labels:
+    app: app-udagram-feeds
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-udagram-feeds
+  template:
+    metadata:
+      labels:
+        app: app-udagram-feeds
+    spec:
+      containers:
+      - name: udagram-feeds
+        image: edrondsal/udagram-feeds
+        ports:
+        - containerPort: 8881
+      env:
+       - name: AWS_BUCKET
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: AWS_BUCKET
+       - name: AWS_PROFILE
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: AWS_PROFILE
+       - name: AWS_REGION
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: AWS_REGION
+       - name: POSTGRES_DB
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_DB
+       - name: POSTGRES_HOST
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_HOST
+       - name: POSTGRES_PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_PASSWORD
+       - name: POSTGRES_USERNAME
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_USERNAME

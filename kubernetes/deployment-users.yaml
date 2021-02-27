@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-udagram-users
+  labels:
+    app: app-udagram-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-udagram-users
+  template:
+    metadata:
+      labels:
+        app: app-udagram-users
+    spec:
+      containers:
+      - name: udagram-users
+        image: edrondsal/udagram-users
+        ports:
+        - containerPort: 8882
+      env:
+       - name: POSTGRES_DB
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_DB
+       - name: POSTGRES_HOST
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_HOST
+       - name: POSTGRES_PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_PASSWORD
+       - name: POSTGRES_USERNAME
+         valueFrom:
+           secretKeyRef:
+             name: config-env
+             key: POSTGRES_USERNAME

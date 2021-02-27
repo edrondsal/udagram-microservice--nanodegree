@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: app-udagram-gateway
+  name: app-udagram-gateway-svc
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/app-udagram-gateway-svc
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    run: app-udagram-gateway
