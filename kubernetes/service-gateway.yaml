@@ -7,8 +7,10 @@ metadata:
   namespace: default
   selfLink: /api/v1/namespaces/default/services/app-udagram-gateway-svc
 spec:
+  type: LoadBalancer
   ports:
-  - port: 8080
-    protocol: TCP
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
   selector:
-    run: app-udagram-gateway
+    app: app-udagram-gateway

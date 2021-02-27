@@ -19,14 +19,14 @@ spec:
         image: edrondsal/udagram-gateway
         ports:
         - containerPort: 8080
-      env:
-       - name: FEED
-         valueFrom:
-           secretKeyRef:
-             name: config-env
-             key: FEED
-       - name: USERS
-         valueFrom:
-           secretKeyRef:
-             name: config-env
-             key: USERS
+        env:
+        - name: FEED
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: FEED
+        - name: USERS
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: USERS

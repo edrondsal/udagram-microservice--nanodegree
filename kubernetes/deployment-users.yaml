@@ -19,24 +19,25 @@ spec:
         image: edrondsal/udagram-users
         ports:
         - containerPort: 8882
-      env:
-       - name: POSTGRES_DB
-         valueFrom:
-           secretKeyRef:
-             name: config-env
-             key: POSTGRES_DB
-       - name: POSTGRES_HOST
-         valueFrom:
-           secretKeyRef:
-             name: config-env
-             key: POSTGRES_HOST
-       - name: POSTGRES_PASSWORD
-         valueFrom:
-           secretKeyRef:
-             name: config-env
-             key: POSTGRES_PASSWORD
-       - name: POSTGRES_USERNAME
-         valueFrom:
-           secretKeyRef:
-             name: config-env
-             key: POSTGRES_USERNAME
+          protocol: TCP
+        env:
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: POSTGRES_DB
+        - name: POSTGRES_HOST
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: POSTGRES_HOST
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: POSTGRES_USERNAME
