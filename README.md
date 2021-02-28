@@ -37,3 +37,7 @@ The strategy consist in having the backend splitted in three microservices:
     ionic serve
     ```
 * You can visit `http://localhost:8100` in your web browser to verify that the application is running. You should see a web interface.
+
+### Public Frontend App
+* You can visit `http://ab560bab59d6149a0adfddd7c1a74339-320872038.eu-west-3.elb.amazonaws.com` in your web browser to verify that the application is running. You should see a web interface.
+
