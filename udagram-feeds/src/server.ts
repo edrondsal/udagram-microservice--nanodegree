@@ -45,10 +45,8 @@ import * as c from './config/config';
   // Get all feed items
   app.get('/api/v0/feed', async (req: Request, res: Response) => {
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
-    console.log(c.config.aws_region);
-    console.log(c.config.aws_profile);
-    console.log(c.config.aws_region);
-   /* const promises = [];
+  
+    const promises = [];
     for (const item of items.rows){
       promises.push( AWS.getGetSignedUrl(item.url))
     }
@@ -58,7 +56,7 @@ import * as c from './config/config';
     for (const item of items.rows){
       items.rows[index].url =  results[index];
       index=index+1;
-    }*/
+    }
 
     res.send(items);
   });
