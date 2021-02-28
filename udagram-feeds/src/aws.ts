@@ -3,15 +3,8 @@ import {config} from './config/config';
 
 
 // Configure AWS
-const credentials = new AWS.SharedIniFileCredentials({profile: config.aws_profile});
-AWS.config.credentials = credentials;
-console.log(AWS.config.credentials);
-
-if(AWS.config.credentials.accessKeyId === undefined){
-  AWS.config.credentials.accessKeyId = process.env.ACCESS_KEY_ID;
-  console.log(AWS.config.credentials);
-}
-
+//const credentials = new AWS.SharedIniFileCredentials({profile: config.aws_profile});
+//AWS.config.credentials = credentials;
 
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
