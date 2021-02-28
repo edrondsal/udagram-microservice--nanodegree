@@ -7,6 +7,12 @@ const credentials = new AWS.SharedIniFileCredentials({profile: config.aws_profil
 AWS.config.credentials = credentials;
 console.log(AWS.config.credentials);
 
+if(AWS.config.credentials.accessKeyId === undefined){
+  AWS.config.credentials.accessKeyId = process.env.ACCESS_KEY_ID;
+  console.log(AWS.config.credentials);
+}
+
+
 export const s3 = new AWS.S3({
   signatureVersion: 'v4',
   region: config.aws_region,

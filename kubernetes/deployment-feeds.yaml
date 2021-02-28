@@ -56,3 +56,8 @@ spec:
             secretKeyRef:
               name: config-env
               key: POSTGRES_USERNAME
+        - name: ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: config-env
+              key: ACCESS_KEY_ID
