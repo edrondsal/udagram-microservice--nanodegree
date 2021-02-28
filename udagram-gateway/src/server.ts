@@ -21,7 +21,7 @@ import cors from 'cors';
       'X-Access-Token', 'Authorization',
     ],
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'http://ab560bab59d6149a0adfddd7c1a74339-320872038.eu-west-3.elb.amazonaws.com:80',
+    origin: '*',
   }));
 
 
