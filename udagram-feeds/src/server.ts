@@ -46,18 +46,11 @@ import * as c from './config/config';
   app.get('/api/v0/feed', async (req: Request, res: Response) => {
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
   
-    const promises = [];
-    for (const item of items.rows){
-      promises.push( AWS.getGetSignedUrl(item.url))
-    }
-
-    const results:string[] = await Promise.all(promises);
-    let index=0;
-    for (const item of items.rows){
-      items.rows[index].url =  results[index];
-      index=index+1;
-    }
-
+    items.rows.map((item) => {
+      if (item.url) {
+        item.url = AWS.getGetSignedUrl(item.url);
+      }
+    });
     res.send(items);
   });
   
@@ -73,7 +66,7 @@ import * as c from './config/config';
   app.get('/api/v0/feed/signed-url/:fileName',requireAuth,
       async (req: Request, res: Response) => {
         const {fileName} = req.params;
-        const url = await AWS.getPutSignedUrl(fileName);
+        const url = AWS.getPutSignedUrl(fileName);
         res.status(201).send({url: url});
       });
   
@@ -98,7 +91,7 @@ import * as c from './config/config';
   
         const savedItem = await item.save();
   
-        savedItem.url = await AWS.getGetSignedUrl(savedItem.url);
+        savedItem.url =  AWS.getGetSignedUrl(savedItem.url);
         res.status(201).send(savedItem);
       });
 
