@@ -46,9 +46,17 @@ import * as c from './config/config';
   app.get('/api/v0/feed', async (req: Request, res: Response) => {
     const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
 
-    await Promise.all(items.rows.map(async (item) => {
-      item.url = await AWS.getGetSignedUrl(item.url);
-    }));
+    const promises = [];
+    for (const item of items.rows){
+      promises.push( AWS.getGetSignedUrl(item.url))
+    }
+
+    const results:string[] = await Promise.all(promises);
+    let index=0;
+    for (const item of items.rows){
+      items.rows[index].url =  results[index];
+      index=index+1;
+    }
 
     res.send(items);
   });
